@@ -93,7 +93,7 @@ buttons = [
         ),
     ],
     [
-        InlineKeyboardButton(text="🙋‍♀️ Sophia News", url=f"https://t.me/dihanofficial"),
+        InlineKeyboardButton(text="🙋‍♀️ updates", url=f"https://t.me/PigasusUpdates"),
         InlineKeyboardButton(
             text="💬 Support Group", url=f"https://t.me/PigasusSupport"
         ),
