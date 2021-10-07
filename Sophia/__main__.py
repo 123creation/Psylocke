@@ -95,7 +95,7 @@ buttons = [
     [
         InlineKeyboardButton(text="🙋‍♀️ Sophia News", url=f"https://t.me/dihanofficial"),
         InlineKeyboardButton(
-            text="💬 Support Group", url=f"https://t.me/dihan_official"
+            text="💬 Support Group", url=f"https://t.me/PigasusSupport"
         ),
     ],
     [
