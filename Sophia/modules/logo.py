@@ -12,7 +12,7 @@ import time
 from telethon.tl.types import InputMessagesFilterPhotos
 
 
-FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+FONT_FILE_TO_USE = "/usr/share/fonts/truetype/Dashdemo-ozJA.ttf"
 
 
 TELEGRAPH_MEDIA_LINKS = ["https://telegra.ph/file/e354ce72d5cc6a1d27c4d.jpg",
