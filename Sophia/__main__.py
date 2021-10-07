@@ -84,7 +84,7 @@ Project By @Kwannon ❤
 buttons = [
     [
         InlineKeyboardButton(
-            text="➕ Add Psylocke to your Group ➕", url="t.me/Sophia?startgroup=true"),
+            text="➕ Add Psylocke to your Group ➕", url="t.me/Psylocke_robot?startgroup=true"),
     ],
     [
         InlineKeyboardButton(text="Source Code 🗒️", callback_data="source_"),
