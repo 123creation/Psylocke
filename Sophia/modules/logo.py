@@ -118,7 +118,7 @@ async def lego(event):
     draw = ImageDraw.Draw(img)
     image_widthz, image_heightz = img.size
     pointsize = 500
-    fillcolor = "red"
+    fillcolor = "white"
     shadowcolor = "black"
     font = ImageFont.truetype("./Sophia/etc/Dashdemo-ozJA.ttf", 250)
     w, h = draw.textsize(text, font=font)
@@ -127,7 +127,7 @@ async def lego(event):
     draw.text(((image_widthz-w)/2, (image_heightz-h)/2), text, font=font, fill=(255, 255, 255))
     x = (image_widthz-w)/2
     y= ((image_heightz-h)/2+6)
-    draw.text((x, y), text, font=font, fill="red", stroke_width=0, stroke_fill="red")
+    draw.text((x, y), text, font=font, fill="black", stroke_width=0, stroke_fill="black")
     fname2 = "SophiaLogo.png"
     img.save(fname2, "png")
     await tbot.send_file(event.chat_id, fname2, caption="Made By @Psylocke_robot")
