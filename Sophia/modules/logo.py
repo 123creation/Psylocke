@@ -40,7 +40,7 @@ async def lego(event):
     pointsize = 500
     fillcolor = "white"
     shadowcolor = "blue"
-    font = ImageFont.truetype("./Sophia/etc/Dashdemo-ozJA.ttf", 250)
+    font = ImageFont.truetype("./Sophia/etc/StarGuard-BKOl.otf", 250)
     w, h = draw.textsize(text, font=font)
     h += int(h*0.21)
     image_width, image_height = img.size
@@ -80,7 +80,7 @@ async def lego(event):
     pointsize = 500
     fillcolor = "white"
     shadowcolor = "blue"
-    font = ImageFont.truetype("./Sophia/etc/Dashdemo-ozJA.ttf", 125)
+    font = ImageFont.truetype("./Sophia/etc/StarGuard-BKOl.otf", 125)
     w, h = draw.textsize(text, font=font)
     h += int(h*0.21)
     image_width, image_height = img.size
@@ -120,7 +120,7 @@ async def lego(event):
     pointsize = 500
     fillcolor = "white"
     shadowcolor = "black"
-    font = ImageFont.truetype("./Sophia/etc/Dashdemo-ozJA.ttf", 250)
+    font = ImageFont.truetype("./Sophia/etc/StarGuard-BKOl.otf", 250)
     w, h = draw.textsize(text, font=font)
     h += int(h*0.21)
     image_width, image_height = img.size
