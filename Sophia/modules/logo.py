@@ -38,7 +38,7 @@ async def lego(event):
     draw = ImageDraw.Draw(img)
     image_widthz, image_heightz = img.size
     pointsize = 500
-    fillcolor = "yello"
+    fillcolor = "white"
     shadowcolor = "blue"
     font = ImageFont.truetype("./Sophia/etc/Dashdemo-ozJA.ttf", 250)
     w, h = draw.textsize(text, font=font)
