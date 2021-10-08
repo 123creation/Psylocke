@@ -50,7 +50,7 @@ async def lego(event):
     draw.text((x, y), text, font=font, fill="gold", stroke_width=0, stroke_fill="gold")
     fname2 = "SophiaLogo.png"
     img.save(fname2, "png")
-    await tbot.send_file(event.chat_id, fname2, caption="Made By @SophiaSLBot 💞")
+    await tbot.send_file(event.chat_id, fname2, caption="Made By @Psylocke_robot 💞")
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
@@ -90,7 +90,7 @@ async def lego(event):
     draw.text((x, y), text, font=font, fill="white", stroke_width=0, stroke_fill="white")
     fname2 = "SophiaLogo.png"
     img.save(fname2, "png")
-    await tbot.send_file(event.chat_id, fname2, caption="Made By @SophiaSLBot")
+    await tbot.send_file(event.chat_id, fname2, caption="Made By @Psylocke_robot")
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
@@ -130,7 +130,7 @@ async def lego(event):
     draw.text((x, y), text, font=font, fill="red", stroke_width=0, stroke_fill="red")
     fname2 = "SophiaLogo.png"
     img.save(fname2, "png")
-    await tbot.send_file(event.chat_id, fname2, caption="Made By @SophiaSLBot")
+    await tbot.send_file(event.chat_id, fname2, caption="Made By @Psylocke_robot")
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
