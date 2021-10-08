@@ -74,7 +74,7 @@ async def lego(event):
  await event.reply('Creating your logo...')
  try:
     text = event.pattern_match.group(1)
-    img = Image.open('./Sophia/etc/large-4864258.jpg')
+    img = Image.open('./Sophia/etc/images (1) (8).jpeg')
     draw = ImageDraw.Draw(img)
     image_widthz, image_heightz = img.size
     pointsize = 500
