@@ -105,9 +105,9 @@ buttons = [
 
 
 HELP_STRINGS = """
-`Hi.. I'm` 𝗦𝗼𝗽𝗵𝗶𝗮 
+`Hi.. I'm` Psylocke 
 Click On The Buttons Below To Get Documentation About Specific Modules..
-Powered by @dihanofficial 💓 [️️ ️](https://telegra.ph/file/583b241199a6c0c0fa38c.jpg) """
+Powered by @PigasusSupport 💓 [️️ ️](https://telegra.ph/file/ef0bfcff313fccc098d59.jpg) """
 
 
 DONATE_STRING = """Hey, glad to hear you want to donate!
