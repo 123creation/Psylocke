@@ -120,14 +120,14 @@ async def lego(event):
     pointsize = 500
     fillcolor = "white"
     shadowcolor = "black"
-    font = ImageFont.truetype("./Sophia/etc/StarGuard-BKOl.otf", 250)
+    font = ImageFont.truetype("./Sophia/etc/StarGuard-BKOl.otf", 50)
     w, h = draw.textsize(text, font=font)
     h += int(h*0.21)
     image_width, image_height = img.size
     draw.text(((image_widthz-w)/2, (image_heightz-h)/2), text, font=font, fill=(255, 255, 255))
     x = (image_widthz-w)/2
     y= ((image_heightz-h)/2+6)
-    draw.text((x, y), text, font=font, fill="white", stroke_width=0, stroke_fill="black")
+    draw.text((x, y), text, font=font, fill="white", stroke_width=10, stroke_fill="pink")
     fname2 = "SophiaLogo.png"
     img.save(fname2, "png")
     await tbot.send_file(event.chat_id, fname2, caption="Made By @Psylocke_robot")
