@@ -80,7 +80,7 @@ async def lego(event):
     pointsize = 500
     fillcolor = "white"
     shadowcolor = "blue"
-    font = ImageFont.truetype("./Sophia/etc/StarGuard-BKOl.otf", 100)
+    font = ImageFont.truetype("./Sophia/etc/StarGuard-BKOl.otf", 50)
     w, h = draw.textsize(text, font=font)
     h += int(h*0.21)
     image_width, image_height = img.size
