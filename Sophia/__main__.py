@@ -366,7 +366,7 @@ def sophia_about_callback(update, context):
                  \n* I have a note keeping system, blacklists, and even predetermined replies on certain keywords.
                  \n* I check for admins' permissions before executing any command
                  \n* Awesome Secret @DihanOfficial
-                 \n* Support Group @dihan_official
+                 \n* Support Group @PigasusSupport
                  \* Assistant @SophiaX_Support
                  \n\nIf you have any question about Sophia, let us know at .""",
             parse_mode=ParseMode.MARKDOWN,
@@ -698,7 +698,7 @@ def main():
             dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "I'm Online Now! My Updates @dihanofficial")
         except Unauthorized:
             LOGGER.warning(
-                "Bot isnt able to send message to @dihan_official, go and check!"
+                "Bot isnt able to send message to @PigasusSupport, go and check!"
             )
         except BadRequest as e:
             LOGGER.warning(e.message)
