@@ -365,7 +365,7 @@ def sophia_about_callback(update, context):
                  \n* I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc.
                  \n* I have a note keeping system, blacklists, and even predetermined replies on certain keywords.
                  \n* I check for admins' permissions before executing any command
-                 \n* Awesome Secret @DihanOfficial
+                 \n* Awesome Secret @PigasusUpdates
                  \n* Support Group @PigasusSupport
                  \* Assistant @SophiaX_Support
                  \n\nIf you have any question about Sophia, let us know at .""",
@@ -695,7 +695,7 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "I'm Online Now! My Updates @dihanofficial")
+            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "I'm Online Now! My Updates @PigasusUpdates)
         except Unauthorized:
             LOGGER.warning(
                 "Bot isnt able to send message to @PigasusSupport, go and check!"
