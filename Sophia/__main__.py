@@ -111,7 +111,7 @@ Powered by @PigasusUpdates 💓 [️️ ️](https://telegra.ph/file/ef0bfcff313
 
 
 DONATE_STRING = """Hey, glad to hear you want to donate!
- You can support the project Of [Dihan Randila](t.me/dihanrandila) \
+ You can support the project Of [Besty Braddock](t.me/besty_Braddock) \
  Supporting isnt always financial! [Dihan Official](t.me/dihanofficial) \
  Those who cannot provide monetary support are welcome to help us develop the bot at ."""
 
