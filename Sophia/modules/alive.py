@@ -1,8 +1,8 @@
 from telethon import events, Button, custom
 import re, os
-from EmiliaAnimeBot.events import register
-from EmiliaAnimeBot import telethn as tbot
-from EmiliaAnimeBot import telethn as tgbot
+from Sophia.events import register
+from Sophia import telethn as tbot
+from Sophia import telethn as tgbot
 PHOTO = "https://telegra.ph/file/9ce5e51b9f4a531ea830b.jpg"
 @register(pattern=("/alive"))
 async def awake(event):
