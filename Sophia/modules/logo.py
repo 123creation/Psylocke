@@ -74,7 +74,7 @@ async def lego(event):
  await event.reply('Creating your logo...')
  try:
     text = event.pattern_match.group(1)
-    img = Image.open('./Sophia/etc/images (1) (8).jpeg')
+    img = Image.open('./Sophia/etc/large-2425960.jpg')
     draw = ImageDraw.Draw(img)
     image_widthz, image_heightz = img.size
     pointsize = 500
@@ -87,7 +87,7 @@ async def lego(event):
     draw.text(((image_widthz-w)/2, (image_heightz-h)/2), text, font=font, fill=(255, 255, 255))
     x = (image_widthz-w)/2
     y= ((image_heightz-h)/2+6)
-    draw.text((x, y), text, font=font, fill="black", stroke_width=10, stroke_fill="orange")
+    draw.text((x, y), text, font=font, fill="white", stroke_width=10, stroke_fill="red")
     fname2 = "SophiaLogo.png"
     img.save(fname2, "png")
     await tbot.send_file(event.chat_id, fname2, caption="Made By @Psylocke_robot")
