@@ -76,9 +76,10 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = f"""
-𝐇𝐞𝐥𝐥𝐨, \n 𝗜'𝗺 Psylocke 
-𝗜'𝗺 𝗛𝗲𝗿𝗲 𝘁𝗼 𝗵𝗲𝗹𝗽 𝘆𝗼𝘂𝗿 𝗚𝗿𝗼𝘂𝗽𝘀! 𝗛𝗶𝘁 /help [️️ ️](https://telegra.ph/file/681b2b18c7d658e8c6f4e.jpg)
-Project By @Kwannon ❤
+Hᴇʟʟᴏ Tᕼᴇʀᴇ! \n [️️ ️](https://telegra.ph/file/681b2b18c7d658e8c6f4e.jpg) 💝, I'm Psylocke !
+I Aᴍ A Superhero Tᕼᴇᴍᴇᴅ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ😘.
+ Wɪᴛʜ Nᴇᴡ Aɴᴅ Pᴏᴡᴇʀғᴜʟ Fᴇᴀᴛᴜʀᴇs❣️...
+Click Tᕼᴇ Hᴇʟᴘ Bᴜᴛᴛᴏɴs Tᴏ Sᴇᴇ Mʏ Fᴇᴀᴛᴜʀᴇs🤗 
 """
 
 buttons = [
@@ -99,7 +100,7 @@ buttons = [
         ),
     ],
     [
-        InlineKeyboardButton(text="❓ Commands Help ", callback_data="help_back"),
+        InlineKeyboardButton(text="❓ Help ", callback_data="help_back"),
     ],
 ]
 
