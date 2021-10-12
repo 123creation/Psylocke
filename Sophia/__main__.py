@@ -87,12 +87,6 @@ buttons = [
             text="➕ Add Psylocke to your Group ➕", url="t.me/Psylocke_robot?startgroup=true"),
     ],
     [
-        InlineKeyboardButton(text="Source Code 🗒️", callback_data="source_"),
-        InlineKeyboardButton(
-            text="System Stats 💻", callback_data="stats_callback"
-        ),
-    ],
-    [
         InlineKeyboardButton(text="🙋‍♀️ updates", url=f"https://t.me/PigasusUpdates"),
         InlineKeyboardButton(
             text="💬 Support Group", url=f"https://t.me/PigasusSupport"
