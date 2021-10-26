@@ -1,6 +1,7 @@
 import importlib
 import time
 import re
+import random
 from sys import argv
 from typing import Optional
 from pyrogram import filters, idle
@@ -24,8 +25,6 @@ from Sophia import (
     updater,
 )
 
-# needed to dynamically load modules
-# NOTE: Module order is not guaranteed, specify that in the config file!
 from Sophia.modules import ALL_MODULES
 from Sophia.modules.helper_funcs.chat_status import is_user_admin
 from Sophia.modules.helper_funcs.misc import paginate_modules
@@ -75,39 +74,46 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-PM_START_TEXT = f"""
-Hᴇʟʟᴏ Tᕼᴇʀᴇ! \n [️️ ️](https://telegra.ph/file/681b2b18c7d658e8c6f4e.jpg) 💝, I'm Psylocke !
-I Aᴍ A Superhero Tᕼᴇᴍᴇᴅ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ😘.
- Wɪᴛʜ Nᴇᴡ Aɴᴅ Pᴏᴡᴇʀғᴜʟ Fᴇᴀᴛᴜʀᴇs❣️ Click Tᕼᴇ Hᴇʟᴘ Bᴜᴛᴛᴏɴs Tᴏ Sᴇᴇ Mʏ Fᴇᴀᴛᴜʀᴇs🤗 
+PM_START_TEXT = """
+Hᴇʟʟᴏ Tᕼᴇʀᴇ!🧚 \n [️️ ️](https://telegra.ph/file/3a9d340db0462d27d469c.jpg) I Aᴍ Pꜱʏʟᴏᴄᴋᴇ!
+I Aᴍ A Sᴜᴘᴇʀʜᴇʀᴏ Tᕼᴇᴍᴇᴅ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ 🧚‍♀️.
+Wɪᴛʜ Nᴇᴡ Aɴᴅ Pᴏᴡᴇʀғᴜʟ Fᴇᴀᴛᴜʀᴇs 📓 Cʟɪᴄᴋ Tᕼᴇ Hᴇʟᴘ Bᴜᴛᴛᴏɴs Tᴏ Sᴇᴇ Mʏ Fᴇᴀᴛᴜʀᴇs 📒
 """
+
+STICKERS = (
+      "CAACAgUAAxkBAAPNYWgLo64Q-FBGKPLNGqxfGCjBoW8AAqEDAAJQZSBXb8WT0PyG5ikhBA",
+      "CAACAgUAAxkBAAPQYWgL2iU_kxWxxFJTh5XRJVWAph0AAtMDAAJbfCFXq9FTMIiiI1IhBA",
+      "CAACAgUAAxkBAAPTYWgL9HFIClAV5JuErc_qdeT2f-oAAmEEAAKDMSBXi5ecdV4Nv4MhBA",
+)    
+
 
 buttons = [
     [
-        InlineKeyboardButton(
-            text="➕ Add Psylocke to your Group ➕", url="t.me/Psylocke_robot?startgroup=true"),
+        InlineKeyboardButton(text="⚙️ Hᴇʟᴘ", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="🙋‍♀️ updates", url=f"https://t.me/PigasusUpdates"),
-        InlineKeyboardButton(
-            text="💬 Support Group", url=f"https://t.me/PigasusSupport"
-        ),
+        InlineKeyboardButton(text="💡 Tɪᴘꜱ Aɴᴅ Sᴏᴜʀᴄᴇ", callback_data="source_"),
     ],
     [
-        InlineKeyboardButton(text="❓ Help ", callback_data="help_back"),
+        InlineKeyboardButton(text="📋 Uᴘᴅᴀᴛᴇꜱ Cʜᴀɴɴᴇʟ", url=f"https://t.me/Pigasusupdates"),
+        InlineKeyboardButton(text="🗣️ Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ", url=f"https://t.me/PigasusSupport"),
+    ],
+    [
+        InlineKeyboardButton(text="🌐 Pꜱʏʟᴏᴄᴋᴇ Sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/Psylocke_support"),
+    ],
+    [
+        InlineKeyboardButton(text="➕ Aᴅᴅ Mᴇ", url="t.me/Psylocke_robot?startgroup=true"),   
     ],
 ]
 
+PSYLOCKE_IMG = "https://telegra.ph/file/cfb3493a34ba133654056.jpg"
 
 HELP_STRINGS = """
-`Hi.. I'm` Psylocke 
+Hi.. I'm Psylocke 
 Click On The Buttons Below To Get Documentation About Specific Modules..
-Powered by @PigasusUpdates 💓 [️️ ️](https://telegra.ph/file/ef0bfcff313fccc098d59.jpg) """
+Powered by @PigasusUpdates 📂[️️ ️](https://telegra.ph/file/61320099cc9d9c0b0dd8d.jpg) """
 
-
-DONATE_STRING = """Hey, glad to hear you want to donate!
- You can support the project Of [Besty Braddock](t.me/besty_Braddock) \
- Supporting isnt always financial! [Pigasus Support](t.me/PigasusSupport) \
- Those who cannot provide monetary support are welcome to help us develop the bot at ."""
+DONATE_STRING = """ @kwannon """
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -120,7 +126,7 @@ CHAT_SETTINGS = {}
 USER_SETTINGS = {}
 
 for module_name in ALL_MODULES:
-    imported_module = importlib.import_module("Sophia.modules." + module_name)
+    imported_module = importlib.import_module("SophiaBot.modules." + module_name)
     if not hasattr(imported_module, "__mod_name__"):
         imported_module.__mod_name__ = imported_module.__name__
 
@@ -209,6 +215,10 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
+            update.effective_message.reply_sticker(
+                random.choice(STICKERS),
+                timeout=60,
+            )
             update.effective_message.reply_text(
                 PM_START_TEXT,
                 reply_markup=InlineKeyboardMarkup(buttons),
@@ -216,13 +226,25 @@ def start(update: Update, context: CallbackContext):
                 timeout=60,
             )
     else:
-        update.effective_message.reply_text(
-            "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
+        update.effective_message.reply_photo(
+            PSYLOCKE_IMG, caption= "<code>Heya psylocke is here ✨ \nI am Awake Since</code>: <code>{}</code>".format(
                 uptime
             ),
             parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                  [
+                  InlineKeyboardButton(text="📚 Sᴜᴘᴘᴏʀᴛ", url="https://t.me/PigasusSupport")
+                  ],
+                  [
+                  InlineKeyboardButton(text="💬 Uᴘᴅᴀᴛᴇs", url="https://t.me/pigasusupdates")
+                  ],
+                  [
+                  InlineKeyboardButton(text="❓ Hᴇʟᴘ", url="https://t.me/Psylocke_robot?start=help")
+                  ]
+                ]
+            ),
         )
-
 
 def error_handler(update, context):
     """Log the error and send a telegram message to notify the developer."""
@@ -352,17 +374,15 @@ def sophia_about_callback(update, context):
     query = update.callback_query
     if query.data == "sophia_":
         query.message.edit_text(
-            text=""" ℹ️ I'm *Psylocke*, a powerful group management bot built to help you manage your group easily.
-                 \n* I can restrict users.
-                 \n* I can greet users with customizable welcome messages and even set a group's rules.
-                 \n* I have an advanced anti-flood system.
-                 \n* I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc.
-                 \n* I have a note keeping system, blacklists, and even predetermined replies on certain keywords.
-                 \n* I check for admins' permissions before executing any command
-                 \n* Awesome Secret @PigasusUpdates
-                 \n* Support Group @PigasusSupport
-                 \* Assistant @SophiaX_Support
-                 \n\nIf you have any question about Sophia, let us know at .""",
+            text=""" My name is *Psylocke*, I have been written with Pyrogram and Telethon.. I'm online since 10 October 2021 and is constantly updated!
+*Bot Version: 3.0*
+\n*Bot Developer:*
+-  @Kwannon
+\n* Updates Channel:* @pigasusUpdates
+* Support Chat:* @pigasusSupport
+                 \n\n* And finally special thanks of gratitude to all my users who relied on me for managing their groups, I hope you will always like me; My developers are constantly working to improve me!
+                 \n\n *Licensed under the GNU Affero General Public Lisence v3.0*
+                 \n© 2020 - 2021 @psylocke_robot. All Rights Reserved """,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -382,6 +402,102 @@ def sophia_about_callback(update, context):
                 disable_web_page_preview=False,
         )
 
+        
+
+    elif query.data == "sophia_basichelp":
+        query.message.edit_text(
+            text=f"*Here's basic Help regarding* *How to use Me*❓"
+            f"\n\n• Firstly Add {dispatcher.bot.first_name} to your group by pressing [here](http://t.me/{dispatcher.bot.username}?startgroup=true) 🧚‍♀️\n"
+            f"\n• After adding promote me manually with full rights for faster experience 🗯\n"
+            f"\n• Than send `/admincache@Psylocke_robot` in that chat to refresh admin list in My database 🗂\n"
+            f"\n\n*All done now use below given button's to know about use!* 🗒\n"
+            f"",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                 [
+                    InlineKeyboardButton(text="👮 Admins", callback_data="sophia_admin"),
+                    InlineKeyboardButton(text="📑 Notes", callback_data="sophia_notes"),
+                 ],
+                 [
+                    InlineKeyboardButton(text="🗣️ Support", callback_data="sophia_support"),
+                 ],
+                 [
+                    InlineKeyboardButton(text="Back", callback_data="source_"),
+                 
+                 ]
+                ]
+            ),
+        )
+
+    elif query.data == "sophia_admin":
+        query.message.edit_text(
+            text=f"*Let's make your group effective now*"
+            f"\nCongragulations, *Psylocke* now ready to manage your group 💬"
+            f"\n\n*Admin Tools* ⚙️"
+            f"\nBasic Admin tools help you to protect and powerup your group 🎓"
+            f"\nYou can ban members, Kick members, Promote someone as admin through commands of bot 📦"
+            f"\n\n*Welcome* 📣"
+            f"\nLets set a welcome message to welcome new users coming to your group 📢"
+            f"send `/setwelcome [message]` to set a welcome message ⚙️",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="Back", callback_data="sophia_basichelp")]]
+            ),
+        )
+
+    elif query.data == "sophia_notes":
+        query.message.edit_text(
+            text=f"<b> Setting up notes</b>"
+            f"\nYou can save message/media/audio or anything as notes 📑"
+            f"\nto get a note simply use # at the beginning of a word 🗒"
+            f"\n\nYou can also set buttons for notes and filters (refer help menu) 📄",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="Back", callback_data="sophia_basichelp")]]
+            ),
+        )
+    elif query.data == "sophia_support":
+        query.message.edit_text(
+            text="* Psylocke's Updates News & Supports*"
+            "\nJoin Support Group & Updates Channel",
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                 [
+                    InlineKeyboardButton(text="🎙 Support Group", url="t.me/PigasusSupport"),
+                    InlineKeyboardButton(text="🌐 Updates Channel", url="t.me/Pigasusupdates"),
+                 ],
+                 [
+                    InlineKeyboardButton(text="Back", callback_data="sophia_basichelp"),
+                 
+                 ]
+                ]
+            ),
+        )
+    elif query.data == "sophia_credit":
+        query.message.edit_text(
+            text=f"*Credit For Sophia's Devs*\n"
+            f"\nHere Some Developers Helping in Making The Sophia Bot",
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                 [
+                    InlineKeyboardButton(text="Dihan", url="t.me/dihanrandila"),
+                    InlineKeyboardButton(text="Inuka", url="t.me/InukaASiTH"),
+                 ],
+                 [
+                    InlineKeyboardButton(text="Back", callback_data="sophia_basichelp"),
+                 
+                 ]
+                ]
+            ),
+        )
+
+
+ 
 @pbot.on_callback_query(filters.regex("stats_callback"))
 async def stats_callbacc(_, CallbackQuery):
     text = await bot_sys_stats()
@@ -393,18 +509,25 @@ def Source_about_callback(update, context):
     query = update.callback_query
     if query.data == "source_":
         query.message.edit_text(
-            text=""" Hi..😍 I'm *Psylocke*
-                 \nHere is the [Source Code](https://github.com/dihanofficial/Sophia) .""",
+            text=""" 💡 Tips and source 
+                 \nClick buttons for help""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
+                  [
+                    InlineKeyboardButton(text="💡 tips", callback_data="sophia_basichelp"),
+                  ],
+                  [
+                    InlineKeyboardButton(text="📂 Source Code", url=f"https://github.com/dihanofficial/SophiaBot"),
+                 ],
                  [
                     InlineKeyboardButton(text="Go Back", callback_data="source_back")
                  ]
                 ]
             ),
         )
+
     elif query.data == "source_back":
         query.message.edit_text(
                 PM_START_TEXT,
@@ -413,6 +536,9 @@ def Source_about_callback(update, context):
                 timeout=60,
                 disable_web_page_preview=False,
         )
+
+
+# Speacial creadit for me  dont edit 
 
 @run_async
 def get_help(update: Update, context: CallbackContext):
@@ -445,7 +571,7 @@ def get_help(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="Help",
+                            text="Click me for help!",
                             url="t.me/{}?start=help".format(context.bot.username),
                         )
                     ]
@@ -615,7 +741,7 @@ def get_settings(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="Settings",
+                                text="⚙ Settings ⚙",
                                 url="t.me/{}?start=stngs_{}".format(
                                     context.bot.username, chat.id
                                 ),
@@ -689,10 +815,10 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "I'm Online Now! My Updates @PigasusUpdates")
+            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "My Telekinesis And Telepathic Powers are returned to me Now [💫](https://telegra.ph/file/043d854cdaae0914817f5.jpg)",parse_mode=ParseMode.MARKDOWN)
         except Unauthorized:
             LOGGER.warning(
-                "Bot isnt able to send message to @PigasusSupport, go and check!"
+                "Bot isnt able to send message to @Psylocke_support, go and check!"
             )
         except BadRequest as e:
             LOGGER.warning(e.message)
@@ -744,7 +870,6 @@ def main():
         telethn.run_until_disconnected()
 
     updater.idle()
-
 
 if __name__ == "__main__":
     LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
